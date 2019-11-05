@@ -1,0 +1,1 @@
+pythonw clipboardtan_vidyo_indir.py
