@@ -794,7 +794,17 @@ for i in os.listdir():
 elhamdülillah bi adedi zerratil kainat: 
 def fonk(output_path = None) dedikten sonra:	# yav arkadaş tmm hoş ama öyle yapmaya ne gerek var, direk parantez
 output_path = output_path or os.getcwd()		# içinde output_path = os.getcwd() diyebilirdim. Ama başka yerde lazım olabilir doğru
-elhamdülillah ya mp3'ü open'la istediğim yerden kestim, ne kadar kolaymış
+------------------
+elhamdülillah ya mp3'ü open'la istediğim yerden kestim, ne kadar kolaymış:
+f = open('dua.mp3','rb')
+ses = f.read()
+s = open('dua_yeni.mp3','wb')
+oran = (9*60+52) / (26*60+23) # istediğim parçanın bütün ses dosyasının uzunluğuna oranı
+ses_yeni = ses[:int(len(ses)*oran)]
+s.write(ses_yeni)
+s.close()
+f.close()
+------------------
 b = byte("ş","utf-8")	veya 32																							
 # locale.getpreferredencoding()	
 Önceki derslerimizde errors parametresinin hangi değerleri alabileceğini tartışmıştık.
@@ -959,6 +969,8 @@ def bode_ciz(k1=-0.49,k2=1):
 	return mag,phase,omega 
 # fonksiyonu çağırırken bode_ciz(); diye çağır yoksa bir sürü data print ediliyor
 ----------------------------------
+git clone ...git
+---
 git pull origin master
 ---
 git add yeni.py				
@@ -969,6 +981,32 @@ git commit -m 'deneme'
 git push origin master
 https://rogerdudler.github.io/git-guide/
 -----------------------------------
+# tf'nin pole veya zero'larını bulmak için kullanılabilir
+GH -> control.tf or control.matlab.tf object
+den = GH.den[0][0]
+den = list(den)
+np.roots(den) 
+------------------------------------
+import matplotlib.pyplot as plt
+import scipy.io as sio
+mat = sio.loadmat('SysIdDataExp2.mat')		# bunun source code'una bak python bunu nasıl açıyo merak ettim
+mat = list(mat.values())
+t = mat[-1]
+out = mat[-2]
+inp = mat[-3]
+fig,(output,input) = plt.subplots(2,1)#sharex=True)
+input.plot(t,inp)
+plt.suptitle('Experimental data from a bump test ')
+input.set(xlabel='Time (sec)', ylabel='Input\nVoltage (Volts)')
+output.plot(t,out)
+mplcursors.cursor(multiple=True)
+output.set(ylabel='Output\nTemperature (Celcius)')
+plt.show(block='False')
+--------------------------------------
+
+
+
+
 BURDAYIM kelimesini arat.
 TEKRAR BAK kelimesini arat.
 
