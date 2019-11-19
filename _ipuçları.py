@@ -973,7 +973,11 @@ def bode_ciz(k1=-0.49,k2=1):
 ----------------------------------
 git clone ...git
 ---
-git git reset HEAD~
+git add something.py
+git commit -m some_msg
+git reset HEAD~
+git push
+Everything up-to-date
 --- 
 git pull origin master
 ---
