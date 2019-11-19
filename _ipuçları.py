@@ -973,6 +973,8 @@ def bode_ciz(k1=-0.49,k2=1):
 ----------------------------------
 git clone ...git
 ---
+git git reset HEAD~
+--- 
 git pull origin master
 ---
 git add yeni.py				
@@ -980,7 +982,7 @@ git rm file1.txt
 git rm --cached file1.txt	# if you want to remove the file only from the Git repository and not remove it from the filesystem
 ---
 git commit -m 'deneme'
-git push origin master
+git push origin master # git push da yetiyo aslında, belki farklı branchlar olduğu zaman 'origin master'a gerek oluyodur
 https://rogerdudler.github.io/git-guide/
 -----------------------------------
 # tf'nin pole veya zero'larını bulmak için kullanılabilir
