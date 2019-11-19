@@ -645,8 +645,10 @@ importlib.reload(sözlük)
 # modülden silinen öğeler, reload() ile yeniden yüklendikten sonra dahi kullanılır durumda kalmaya devam eder.
 # ayrı bi klasör ise: python setup.py install
 ---
-# yazdığın modülün en başına şunu yazınca: __all__ = ['fonk1', 'fonk2', 'fonk3'] from modül import * komutu 			
-# ile sadece o fonksiyonlar içe aktarılır. Ancak diğer içe aktarmalarda bu __all__ komutu işe yaramaz
+# yazdığın modülün en başına şunu yazınca: __all__ = ['fonk1', 'fonk2', 'fonk3'] from modül import * komutu ile sadece o fonksiyonlar
+# içe aktarılır. Yani import modül ve dir(modül) dersen onların dışında bişey göremezsin 
+# Ancak from modül import fonk tarzındaki aktarmada bu __all__ komutu işe yaramaz.
+# Ama tabi o durumda önceden fonk diye bi fonksiyon olduğunu bilmek gerekiyor.
 İlginç bir özellik: dir(__import__("random")) deyince çalışıyor ama random normal olarak import edilmiş gibi olmuyor
 open("den.txt","w").write("merhaba"); __import__("subprocess").call("notepad.exe den.txt") # çok güzel
 [*kümeler] == kümeler 	#basit ama güzel. Diğer çeşidi: 	
@@ -1003,7 +1005,8 @@ mplcursors.cursor(multiple=True)
 output.set(ylabel='Output\nTemperature (Celcius)')
 plt.show(block='False')
 --------------------------------------
-
+result_2 =  [list(i) for i in itertools.product(teta_degree,t,x_values)] #fayda vermedi, even a bit worse 
+--------------------------------------
 
 
 
