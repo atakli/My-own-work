@@ -985,6 +985,7 @@ git add yeni.py
 git rm file1.txt			
 git rm --cached file1.txt	# if you want to remove the file only from the Git repository and not remove it from the filesystem
 ---
+git rm -r *.png 			# yukarıdaki gibi -r olmadan ne farkı var bilmiyorum
 git commit -m 'deneme'
 git push origin master # git push da yetiyo aslında, belki farklı branchlar olduğu zaman 'origin master'a gerek oluyodur
 https://rogerdudler.github.io/git-guide/
