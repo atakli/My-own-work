@@ -8,3 +8,5 @@ for i in os.listdir():
 # ffmpeg komutunu cmd'de penceresiz çalıştırmayı aradım ama bulamadım (-hide_banner diye bişey var ama anlamadım)
 # edit: pythonw ile çalıştırınca olmuyo mu işte
 # 		ayrıca mp3'e çevirmek için o kadar kod gerekmiyodu sanki
+# edit: evet -f mp3'e gerek yok. -f mp3 diye bişey varsa output'u .mp3 uzantısı olmadan yazabilmem lazım, halbuki onu yazmayınca
+# uzantısız oluşturuyo dosyayı, sonra elle uzantıyı yazmam gerekiyo
