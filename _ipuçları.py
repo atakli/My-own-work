@@ -1014,8 +1014,12 @@ plt.show(block='False')
 --------------------------------------
 result_2 =  [list(i) for i in itertools.product(teta_degree,t,x_values)] #fayda vermedi, even a bit worse 
 --------------------------------------
-
-
+# .sort() dediğin şeyin output'u none olduğu için bu satır her zaman True verir:
+print('aymi mi: ',np.array_equal(final_result.sort(),result1.sort()))
+--------------------------------------
+In [17]: 8==8.0000000000000001
+Out[17]: True
+--------------------------------------
 
 BURDAYIM kelimesini arat.
 TEKRAR BAK kelimesini arat.
