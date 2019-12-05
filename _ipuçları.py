@@ -1020,9 +1020,101 @@ print('aymi mi: ',np.array_equal(final_result.sort(),result1.sort()))
 In [17]: 8==8.0000000000000001
 Out[17]: True
 --------------------------------------
+vars(globals()['__builtins__'])
+--------------------------------------
+python setup.py install --user
+#kalıcı olarak dev version'ı yüklemek için
+--------------------------------------
+# 8.7 saniye
+# çok ibretlik: stackoverflow'a sordum, birinin (onun da dediği gibi çok etkilemeyeceğini
+# düşünsem de) dediğini yaparak tan ile cos'u inner loop'tan outer loop'a alınca
+# bu üç for'lu blok 4.5 saniyeden 0.6 saniyeye indi (100-10'da)
+---
+# saçmalığa gel. demek ki 91 işe yaramıyor. çünkü sayılar çok küsuratlı, round etmek lazım
+---
+result1.sort()  # iç içe olan listeyi sort etmek saçma bi sonuç verdi
+---
+bune = list(result1 for result1,_ in groupby(result1))	# you have to sort the data before using groupby 
+---
+son=sorted(son)	# nasıl sort ediyo anlamadım. edit: anladım. ilk önce her elemanın ilk elemanına bakıyo, sonra ihtiyaç olursa ikinciye bakıyo
+---
+# elhamdülillah ya for loop yerine np array kullanınca 0.8591713905334473'ten 0.03124380111694336'a düştü 100-5'te
+---
+Like image processing with Pillow, high-performance machine learning with scikit-learn, or micro-threading with greenlet. 
+But how can these packages do things that aren’t possible in regular Python?
 
+The answer is that they include extension modules, sometimes called native modules. Unlike Python modules, these are not .py files
+containing Python source code – they are .pyd files that contain native, platform-specific code, typically written in C. 
+In many cases the extension module is an internal detail; all the classes and functions you’re actually using have been written 
+in Python, but the tricky parts or the high-performance parts are in the extension module.
+...
+As a Windows user, you’re probably used to downloading programs that are ready to run. This is largely due to the very impressive 
+compatibility that Windows provides – you can take a program that was compiled twenty years ago and run it on versions of Windows 
+that nobody had imagined at that time. However, Python comes from a very different world where every single machine can be different 
+and incompatible. This makes it impossible to precompile programs and only distribute the build outputs, because many users will not 
+be able to use it. So the culture is one where only source code is distributed, and every machine is set up with a compiler and the 
+tools necessary to build extension modules on install. Because Windows has a different culture, most people do not have 
+(or need) a compiler.
+
+The good news is that the culture is changing. For Windows platforms, a package developer can upload wheels of their packages 
+as well as the source code. Extension modules included in wheels have already been compiled, so you do not need a compiler on the 
+machine you are installing onto.
+-------------------------------------
+In [71]: print("%.e" % .000009878)		# scientific notation print
+1e-05
+In [72]: print("%e" % .000009878)
+9.878000e-06
+In [73]: print("%.2e" % .000009878)
+9.88e-06
+-------------------------------------
+yav şu işe bak ipython --pylab diye bişey varmış yeni öğreniyorum. plot deyince show'a gerek kalmıyo ve 
+xlim gibi şeyleri hemen tesir ettiriyo plot üzerinde, kapatıp açmadan. matlab gibi
+ tutor diyo ki: 
+"In all examples, this book will assume that you are using a Unix-based computer:
+either Linux or Macintosh. If you are using a Windows machine and are for some reason :)
+unable or unwilling to upgrade that machine to Linux, you can still use Python on a
+command line by installing the Python(x,y) package and opening an 'iPython' window." 
+---
+frequency, mic1, mic2 = loadtxt('microphones.txt', unpack = True)
+---
+
+-------------------------------------
+myarray = numpy.array([[1, 2, 3], [4, 5, 6]])
+rownames = ['a', 'b']
+colnames = ['one', 'two', 'three']
+mydataframe = pandas.DataFrame(myarray, index=rownames, columns=colnames)
+mydataframe.one
+mydataframe['one'] 																#bu iki misali hazmetmedim
+---
+myarray = numpy.array([1, 2, 3])
+rownames = ['a', 'b', 'c']
+myseries = pandas.Series(myarray, index=rownames)
+---
+data = data = pandas.read_csv(url,names=names)
+# understand your data using descriptive statistics: 
+data.shape
+data.dtype
+data.describe()		# her name'e ait count mean std min 25% 50% 75% max'leri veriyo
+data.head()			# to look at the first few rows.
+data.corr()			# Calculate pairwise correlation between your variables. ama ne manaya geldiğini anlamadım
+scatter_matrix(data)# anlamadım ne işe yaradığını
+---
+myarray = numpy.array([[1, 2, 3], [4, 5, 6]])
+rownames = ['a', 'b']
+colnames = ['one', 'two', 'three']
+mydataframe = pandas.DataFrame(myarray, index=rownames, columns=colnames)
+---
+
+-------------------------------------
+%whos # you can see which variables are in memory
+-------------------------------------
+np.any 	# arraydaki herhangi (any) bi eleman true ise true döndürür
+		# boş veya hepsi false ise false döndürür. can be thought as OR operation
+np.all	# hepsi true ise veya boş ise true döndürür. can be thought as AND operation
+# both of them short circuit i.e. the execution as soon as the result is known 
 BURDAYIM kelimesini arat.
 TEKRAR BAK kelimesini arat.
+-------------------------------------
 
 
 
