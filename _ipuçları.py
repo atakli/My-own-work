@@ -1,7 +1,5 @@
 # COMMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENT!!!!!!!!!!
-
 # When writing code, simultaneously try on for a small object. 
-
 #  
 import keyword		keyword.kwlist
 del degisken
@@ -23,7 +21,7 @@ print("bismillah",file=dosya)	denktir		print("bismillah",file=dosya,flush=False)
 dosya.close()								#flush parametresi True olursa dosyanın kapatılmasını
 #beklemeden print ediyo
 ---
-print(*"galatasaray",sep=") 		# karakter dizisini tek tek öğelerine ayırıp
+print(*"galatasaray",sep="") 		# karakter dizisini tek tek öğelerine ayırıp
 # bu öğeleri yine tek tek ve sanki her bir öğe ayrı bir parametreymiş gibi o fonksiyona gönderiyor
 len(*"gala","tasaray") = 5 			#lüzumsuz gibi görünebilir ama nerede işe yarayacağı belli olmaz
 ---
@@ -58,30 +56,9 @@ print("yahoo.com\b.uk")	m'yi sildi		print("risale","\b","\b.com")		print("istihz
 #Mesela, grafik bir arayüze sahip (yani düğmeli, menülü) programların ezici çoğunluğu 
 #nesne tabanlı programlama yöntemiyle geliştiriliyor.
 #Nesne tabanlı programlama, komut arayüzlü programlar geliştirmek için de kullanışlı bir programlama yöntemidir.
----										
-sesli_harfler="aeıioöuü"
-sayaç=0
-kelime=input("Bir kelime girin: ")
-for harf in kelime:
-	if harf in sesli_harfler:
-		sayaç+=1
-mesaj="{} kelimesinde {} sesli harf var."
-print(mesaj.format(kelime,sayaç))
----
-print(r"Kurulum dizini: C:\aylar\nisan\toplam masraf")
-(#!/usr/bin/env python3 ve # -*- coding: utf-8 -*- satırları hariç).
----
-sayı = input("Herhangi bir veri girin: ")
-tip = type(sayı)
-print("Girdiğiniz verinin tipi: ", tip)
 ---
 #eval() ve exec() hakkındaki güvenlik açığı meselesine dikkat (security bug veya security flaw)
 bunlar işe yarar fonksiyonlar
----	
-print("Hata! Google Chrome {} {} bulamadı".format(url,neyi)) veya print(cümle.format(...))
----
-metin="Hata! Google Chrome {} {} bulamadı"
-metin.format(url,neyi)							veya 		("xyz.com","adresini")
 ---
 >>> kartvizit="""
 ... istihza aonim şikeri
@@ -90,28 +67,9 @@ metin.format(url,neyi)							veya 		("xyz.com","adresini")
 ... """ dedikten sonra komut satırına kartvizit yazıp enterlamak ile print(kartvizit) demek farklı sonuç veriyor!!!
 ayrıca şu """ alt satıra geçme konusunda çok iyi """
 ---
-sayı = int(input("Bir sayı giriniz: "))
-3+5		# 3 ve 5 operand(işlenen) ve + işareti işleç(operator)		
-#65 % 10 = 5		herhangi bir sayının son basamağını elde etmek için
-int(4/3)		=		1		4//3	=	1		ikisi de round etmiyo.
----
-round(2.48)		=		2
-round(2.75,1)	=		2.8
----
-pow(25,2,5)		=		(25**2)%5
-bool(0)=bool("")=False
----
-isim = input("İsminiz: ")
-print(isim == "Ferhat")
----
-kullanıcı=input("kullanıcı adınızı giriniz: ")
-if kullanıcı:
-	print("Teşekkürler")
----
 if'leri iç içe kullanmak yerine and filan kullan					
 note>=90 and note<=100		ile 		note>=90<=100 aynı;		90<=note<=100 ile zaten aynı
 a-=5 işlemi normaline göre daha hızlı çalışır
-"i" in "inek"
 id(a)			a is 100
 #is işleci nesnelerin kimliklerine bakıp o nesnelerin aynı nesneler olup olmadığını kontrol ederken,
 # == işleci nesnelerin içeriğine bakarak o nesnelerin aynı değere sahip olup olmadıklarını sorgular.
@@ -125,69 +83,14 @@ girdi=u"gelsene" # unicode olarak tanımlamak için. çünkü mesela 2x sürüml
 #utf-8 yapıp hata mesajından kurtulsan bile türkçe karakterler düzgün görüntülenmeyebilir,o yüzden bu lazım
 ---
 ctrl+c ve ctrl+z: keyboard interrupt
----
-while True:		#Aksi belirtilmediği sürece çalışmaya devam et! demek
-...
-	break
----
-tekrar=1
-while tekrar<=3:
-    tekrar+=1
-    input("Nassın iyimin?")
----
 #bir Python programının nasıl çalıştığını anlamanın en iyi yolu, program içinde uygun yerlere 
 #print() fonksiyonları yerleştirerek arka planda hangi kodların hangi çıktıları verdiğini izlemektir.
 __import__("os").system("dir")
 ---
-for i in range(0,10):	#range(10) desek de olur #ilk sayı dahil, son sayı dahil değil
-	print(i)
----
-izinli_karakterler = "0123456789+-/*= "
-for s in veri:
-    if s not in izinli_karakterler:
-        print("Neyin peşindesin?!")
-        quit()
-hesap = eval(veri)							# TEKRAR BAK. TAM OLARAK NE İŞE YARADIĞINI HATIRLAMIYORUM
----
 print(*range(10))
-pass: hiç bir şey yapmadan yoluna devam et	# TEKRAR BAK
-# Programın gidişatına göre, bir noktada yapmanız gereken bir işlem var, ama henüz ne yapacağınıza karar vermediniz.
-# Böyle bir durumda oraya bir pass koyarak durumu şimdilik geçiştiriyorsunuz.
-break ifadesinin her zaman bir döngü içinde yer alması gerekiyor. Aksi halde """SyntaxError: 'break' outside loop"""
-continue döngünün başına döndürür
 ---
->>> ilk_metin = "asdasfddgdhfjfdgdşfkgjdfklgşjdfklgjdfkghdfjghjklsdhajlsdhjkjhkhjjh"
->>> ikinci_metin = "sdfsuıdoryeuıfsjkdfhdjklghjdfklruseldhfjlkdshfljskeeuf"
->>> for i in ilk_metin:
-...     if i not in ikinci_metin:
-...             if i not in dizi:
-...                     print(i)
-...                     dizi+=i
-...
-a
-ş
----	veya
-for s in ilk_metin:
-    if not s in ikinci_metin and not s in dizi:
-            dizi+=s
-            print(s)
-a
-ş
+print(repr(karakter_dizisi))	#çıktıdaki \n'leri görebilmek için	# TEKRAR BAK
 ---
-
----
-print(repr(karakter_dizisi))	#çıktıdaki \n'leri görebilmek için								# TEKRAR BAK
-#bug‘lar ise çok daha karmaşıktır. Kusurlu programlar çoğu zaman herhangi bir hata vermeden çalışır. 
-#Ancak programın ürettiği çıktılar beklediğiniz gibi değildir. Örneğin yazdığınız programda 
-#bir formül hatası yapmış olabilirsiniz. Böyle bir program çalışma sırasında hata vermeyeceği için 
-#buradaki sorunu tespit etmek, özellikle büyük programlarda çok güçtür. ooooo
----
-ilk_sayı:input("ilk sayı: ")					
-ikinci_sayı:input("ikinci sayı: ")
-try:
-	sayı1=int(ilk_sayı)
-	sayı2=int(ikinci_sayı)
-	print(sayı1,"/",sayı2,"=",sayı1/sayı2)
 except ValueError:
 	print("Lütfen sadece sayı girin: ")
 veya
@@ -532,6 +435,9 @@ for i in range(1000):
 	liste+=[i]
 3)
 liste = [i for i in range(1000)]		387 ms ± 9.99 ms per loop
+EDIT:
+4)
+%timeit k=np.arange(1000)				14.4 µs ± 50.4 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 ---
 liste2=liste[:]															# işe yarayabilir. 2D listede aynısını yaptım oldu
 #kopyalama ama aynı id'ye sahip olmadığı için ilkini değiştirince ikincisinin de değişmemesi
@@ -610,15 +516,7 @@ for filename in os.listdir():
     i+=1
 print(os.listdir())								# çok iyi ya elh
 ---
-from os import path as p
-Yıldızlı içe aktarma işlemleri ancak modül seviyesinde, yani global isim alanında gerçekleştirilebilir.
-Yani mesela def içinde "from sys import *" yazma	# EDIT: dert etme zaten yazılmıyo
----
 from sys import * # modül içindeki bütün isimleri mevcut ortama ‘boşaltmış’ oluyoruz (ismi "_" ile başlayanlar hariç)
----
-# Python’daki bütün modüller Python programlama dili ile yazılmamıştır. Bazı modüller C ile yazılmıştır.
-# Dolayısıyla C ile yazılmış bir modülün .py uzantılı bir Python dosyası bulunmaz. Mesela sys böyle bir modüldür.
-# Dolayısıyla bu modülün bir __file__ niteliği de bulunmaz
 ---
 from distutils import sysconfig
 sysconfig.get_python_lib()			#site-packages klasörünün adresini gösterir
@@ -639,8 +537,6 @@ def ekle(sözcük, anlam):
     mesaj = "{} kelimesi sözlüğe eklendi!"
     sözlük[sözcük] = anlam
     print(mesaj.format(sözcük))
----
-importlib.reload(sözlük)
 ---
 # modülden silinen öğeler, reload() ile yeniden yüklendikten sonra dahi kullanılır durumda kalmaya devam eder.
 # ayrı bi klasör ise: python setup.py install
@@ -842,7 +738,7 @@ Threading hakkında daha basit bir örnek vermek gerekirse, iş başvurusu yapac
  dönülüp dönülmeyeceğini bilmiyorsunuz. Bu sebeple, daha bir yerden cevap gelmeden, diğer işyerlerine de başvuru göndermek istersiniz,
  böylece en kısa sürede iş bulabilirsiniz. 
 ---
->>> def foo(x=[]):																						
+>>> def foo(x=[]):								# bu nasıl oluyo lan 																	
 ...     x.append(1)
 ...     print x
 ... 
@@ -853,15 +749,6 @@ Threading hakkında daha basit bir örnek vermek gerekirse, iş başvurusu yapac
 >>> foo()
 [1, 1, 1]							
 											yerine: (önceki nasıl öyle sonuç veriyo???)
->>> def foo(x=None):
-...     if x is None:
-...         x = []
-...     x.append(1)
-...     print x
->>> foo()
-[1]
->>> foo()
-[1]
 --------------------
 from collections import Counter																							
 my_list = [1,3,4,1,4,6,12,3,4]
@@ -989,6 +876,10 @@ git rm -r *.png 			# yukarıdaki gibi -r olmadan ne farkı var bilmiyorum
 git commit -m 'deneme'
 git push origin master # git push da yetiyo aslında, belki farklı branchlar olduğu zaman 'origin master'a gerek oluyodur
 https://rogerdudler.github.io/git-guide/
+---
+git log # şimdiye kadar yapılan commitler
+git log --oneline # muhtasar hali, sadece isimler
+git whatchanged
 -----------------------------------
 # tf'nin pole veya zero'larını bulmak için kullanılabilir
 GH -> control.tf or control.matlab.tf object
@@ -1104,9 +995,58 @@ rownames = ['a', 'b']
 colnames = ['one', 'two', 'three']
 mydataframe = pandas.DataFrame(myarray, index=rownames, columns=colnames)
 ---
+"""dolaptaki ayvanın hoşuma gitmediğini, tadının pek sevilmeyeceğini söylememeliydim, gerçi belirttim ama 1 tane ayvaya bakarak
+hüküm çıkartmış olmama rağmen bütün ayvalara ve dersanedeki herkese teşmil edildi halbuki günlersonra tekrar yedim busefer sevdim"""
 
 -------------------------------------
 %whos # you can see which variables are in memory
+-------------------------------------
+Fs,y = read('den.wav')
+wav_dosyasi_as_byte = wave.open('den.wav')
+nframes = wav_dosyasi_as_byte.getnframes()
+frames = wav_dosyasi_as_byte.readframes(nframes)
+wav_from_bytes = np.frombuffer(frames,'int')		# wav_from_bytes.shape = (93184,)  # plt.plot(wav_from_bytes) tamamı 0 gibi ?
+# frombuffer metodunun dtype'ına dikkat etmezsen yanlış sonuç verir
+# wav_from_bytes sadece bir channel'ı verdi gibi
+wav_from_bytes_scaled = wav_from_bytes / 	 # niyeyse hayvan gibi büyük sayılar, halbuki şekli aynı. scale ettim
+wh = np.isclose(wav_from_bytes_scaled,y0,rtol=100)
+-------------------------------------
+import matplotlib.pyplot as plt
+fig = plt.figure()
+plt.title('Digital filter frequency response')
+ax1 = fig.add_subplot(111)
+
+plt.plot(w, 20 * np.log10(abs(h)), 'b')
+plt.ylabel('Amplitude [dB]', color='b')
+plt.xlabel('Frequency [rad/sample]')
+
+# ax2 = ax1.twinx()
+# angles = np.unwrap(np.angle(h))
+# plt.plot(w, angles, 'g')
+# plt.ylabel('Angle (radians)', color='g')
+plt.grid()
+plt.axis('tight')
+plt.show()
+-------------------------------------
+#bits_list = []
+#for index in range():
+#    bits = [index & (2 ** k) for k in range(8)]
+#    bits_list.append(tuple((1 if b else 0) for b in bits))
+#    to_byte = dict((bits, i) for i, bits in enumerate(bits_list))
+-------------------------------------
+#unutma: copy.deepcopy meselesi
+-------------------------------------
+k.shape = (5,2)		m.shape = (5,1)		k[:] = m	
+# deyince array([[ 7,  7], [ 4,  4], [13, 13], [ 0,  0], [ 1,  1]]) oluyor
+-------------------------------------
+# ilginç bir broadcasting örneği:
+x = np.arange(4)
+xx = x.reshape(4,1)
+xx
+y([[0], [1], [2], [3]])
+y = np.random.randint(1,10,5) 		# y = array([7, 6, 3, 6, 4])
+xx+y
+y([[ 7,  6,  3,  6,  4], [ 8,  7,  4,  7,  5], [ 9,  8,  5,  8,  6], [10,  9,  6,  9,  7]])
 -------------------------------------
 np.any 	# arraydaki herhangi (any) bi eleman true ise true döndürür
 		# boş veya hepsi false ise false döndürür. can be thought as OR operation
