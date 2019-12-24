@@ -134,16 +134,7 @@ subprocess.Popen("%s %s" % (chromePath,png))
 #yazabilirsiniz. Mesela eğer dosya üzerinde işlem yapılırken bir hata ile karşılaşılırsa 
 #dosyamızı kapatma işlemini gerçekleştirdiğimiz bölüme hiç ulaşılamayabilir.
 ---
-raise Exception("Bu programda 23 sayısını görmek istemiyorum!")			
----
-#hoşuma gitti:
-site1 = "www.google.com"
-site2 = "www.istihza.com"
-site3 = "www.yahoo.com"
-site4 = "www.gnu.org"
-for isim in site1,site2,site3,site4:
-	print("site: ",isim[4:-4])
-#Burda hem 4:-4'teki -4 meselesi çok güzel hem de site'lerin yan yana yazılınca ortaya çıkan netice çok güzel
+raise Exception("Bu programda 23 sayısını görmek istemiyorum!")		
 ---
 kardiz="istihza"
 >>> kardiz[0:7:2]
@@ -155,11 +146,6 @@ for i in reversed("gelmene gerek yok"):
 	print(i,end="")
 veya
 print(*reversed("gelmene gerek yok"),sep="")	#velhasıl range gibi, yani for döngüsü içine almak gerekiyo
----
-for i in sorted("kitap"):
-    print(i,end="")
-
-aikpt
 ---
 #sorted fonksiyonu türkçe karakteri içeren kelimeleri doğru sıralayamaz, o yüzden şunu yapmak lazım:
 import locale																							
@@ -407,17 +393,11 @@ Fırat Özgül
 #Çünkü bildiğiniz gibi karakter dizileri değiştirilemeyen veri tipleridir.
 ---
 #isterseniz listeleri değişikliğe uğratabilirsiniz:
-isim_listesi = []
-def fonk():
-    isim_listesi.extend(['Fırat Özgül', 'Orçun Kunek']) 
-    return isim_listesi
-print(fonk())
-#ama .extend() yerine += olursa hata verir.																		 EDIT: NEDEN????
-f'Sayıların toplamı { int(input("İlk sayıyı gir: ")) + int(input("İkinci sayıyı gir: ")) } eder.'
+f'Sayıların toplamı { int(input("İlk sayıyı gir: ")) + int(input("İkinci sayıyı gir: ")) } eder.'						#iyiymiş
 ---
 alfabe = "abcçdefgğhıijklmnoöprsştuüvyz" harf_listesi=list(alfabe); print(harf_listesi) her harften bölmek için
 li=list()		#boş liste oluşturur
->>> list(range(2))	#aslına burada yaptığımız şey range ifadesini bir listeye çevirmekten ibarettir
+>>> list(range(2))	#aslında burada yaptığımız şey range ifadesini bir listeye çevirmekten ibarettir
 [0, 1]				#bu arada range ifadesinin type'i "range"miş
 ---
 >>> meyveler
@@ -468,17 +448,9 @@ bu tanımlamak yerine değişiklik yapmanın ehemmiyeti harcanan zamandan geliyo
 # TypeError: 'int' object is not iterable hatası verir
 ---
 liste += [7] ile liste = liste + [7] farklı şeyler; ikincisi yeniden tanımlamak oluyor
-from time import sleep
 işletim_sistemleri.extend(platformlar)
 liste.insert(1, "erik")
 liste.remove("elma")
----
-f=open("deneme.txt","r")
-içerik = f.readlines()
-içerik.insert(1,"Ferhat Yaz\n")
-g=open("deneme.txt","w")
-g.writelines(içerik)
-g.close(); f.close()
 ---
 print(*reversed(meyveler))				veya
 list(reversed(meyveler))												
@@ -1047,6 +1019,88 @@ y([[0], [1], [2], [3]])
 y = np.random.randint(1,10,5) 		# y = array([7, 6, 3, 6, 4])
 xx+y
 y([[ 7,  6,  3,  6,  4], [ 8,  7,  4,  7,  5], [ 9,  8,  5,  8,  6], [10,  9,  6,  9,  7]])
+-------------------------------------
+In [47]: %%timeit
+    ...: newlist = [s.upper() for s in oldlist]
+    ...:
+    ...:
+46.7 ms ± 261 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+
+In [48]: %%timeit
+    ...: newlist = [s.upper() for s in old]
+    ...:
+    ...:
+10.1 ms ± 52.4 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+#####	list cmprehension list ile array'a göre daha hızlı. ilginç
+--- # ikinci bir örnek:
+In [49]: %%timeit
+    ...: for word in oldlist:
+    ...:     newlist.append(word.upper())
+    ...:
+55 ms ± 1.15 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+
+In [50]: %%timeit
+    ...: for word in old:
+    ...:     newlist.append(word.upper())
+    ...:
+18 ms ± 1.03 ms per loop (mean ± std. dev. of 7 runs, 100 loops each)
+--- # Ama şu çok iyi ya. hem array hem list, map ile dehşet hızlanıyor; for'a ve comprehension'a göre:
+In [51]: %%timeit
+    ...: newlist = map(str.upper, oldlist)
+    ...:
+    ...:
+2.23 µs ± 33.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+
+In [52]: %%timeit
+    ...: newlist = map(str.upper, old)
+    ...:
+    ...:
+2.24 µs ± 32.5 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+-------------------------------------
+ben bu aralar numpy array'e baya sardım ama for döngüsü gerekmediği durumlarda list daha hızlı olabilir bakmak lazım
+-------------------------------------
+f = open('??? ???? ???? ???? ? ??? ????? ????? ????? ??? ??? ???? ???? ??????? ??????? ????? ?????? ?????.mp3')
+# farsça karakterler var o yüzden öyle görünüyo
+f = f.read() # ilk unicode error verdi, tekrar deneyince oldu nasılsa
+-------------------------------------
+np.pad(arr.reshape(-1, 1), ((0, 0), (2, 0)), 'constant').reshape(-1, )
+-------------------------------------
+def greet(greeting,target):
+    return '%s! %s' % (greeting,target)
+gre = functools.partial(greet,'hola')
+gre('bob')
+'hola! bob'
+-------------------------------------
+stop writing classes:
+if you need later, you can convert :)
+so in conclusion if you see a class with two methods and init :) it'a not a class. Don't make new exceptions, when you don't need to
+and ypou don't need to :) ^^
+-------------------------------------
+%load_ext fortranmagic							# ipython'da çalışmadı
+%%fortran
+subroutine func_fort(n,d)
+    integer, intent(in) :: n
+    double precision, intent(out) :: d
+    integer :: i
+    d = 0
+    do i = 0, n = 1
+        d = d + (mod(i,3) - 1) * i
+    end do
+end subroutine func_fort
+-------------------------------------
+np.min, min'den çok hızlıymış nasılsa
+-------------------------------------
+mask = L < 4 | L > 8
+L[mask]
+ind = [0,4,2]
+L[ind]
+-------------------------------------
+M = np.arange(6).reshape(2,3)
+M[[1,0],:2]
+M[M.sum(axis=1) > 4, 1:]
+-------------------------------------
+i = np.arange(1000)
+D[i,i] = np.inf
 -------------------------------------
 np.any 	# arraydaki herhangi (any) bi eleman true ise true döndürür
 		# boş veya hepsi false ise false döndürür. can be thought as OR operation
