@@ -1102,6 +1102,11 @@ M[M.sum(axis=1) > 4, 1:]
 i = np.arange(1000)
 D[i,i] = np.inf
 -------------------------------------
+fa = 'simpsons homer marge bart lisa sally'
+lastname, *members = fa.split()				# çok iyi
+-------------------------------------
+cast = {input('role? '): input('actor? ') for i in range(2)}	# maşallah
+-------------------------------------
 np.any 	# arraydaki herhangi (any) bi eleman true ise true döndürür
 		# boş veya hepsi false ise false döndürür. can be thought as OR operation
 np.all	# hepsi true ise veya boş ise true döndürür. can be thought as AND operation
