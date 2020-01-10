@@ -6,7 +6,6 @@ del degisken
 #sonuc=gün * (gidiş_ücreti + dönüş_ücreti) değeri gün'ün değerini değiştirince değişmedi,
 #tekrar atamak gerekiyo!!!
 pow(3,2,4)=1
-ocak = mart = mayıs = temmuz = ağustos = ekim = aralık = 31
 y=7; u=6
 ---
 osman, mehmet=mehmet, osman						#çok hoş
@@ -1058,6 +1057,17 @@ In [52]: %%timeit
 2.24 µs ± 32.5 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 -------------------------------------
 ben bu aralar numpy array'e baya sardım ama for döngüsü gerekmediği durumlarda list daha hızlı olabilir bakmak lazım
+---
+>>> def myfunc(a, b):
+...     ​"Return a-b if a>b, otherwise return a+b"
+...     ​if a > b:
+...         ​return a - b
+...     ​else:
+...         ​return a
+>>>
+>>> vfunc = np.vectorize(myfunc)
+>>> vfunc([1, 2, 3, 4], 2)
+array([3, 4, 1, 2])
 -------------------------------------
 f = open('??? ???? ???? ???? ? ??? ????? ????? ????? ??? ??? ???? ???? ??????? ??????? ????? ?????? ?????.mp3')
 # farsça karakterler var o yüzden öyle görünüyo
@@ -1074,7 +1084,14 @@ gre('bob')
 stop writing classes:
 if you need later, you can convert :)
 so in conclusion if you see a class with two methods and init :) it'a not a class. Don't make new exceptions, when you don't need to
-and ypou don't need to :) ^^
+and you don't need to :) ^^
+-------------------------------------
+def on_progress(stream, chunk, file_handle, bytes_remaining):
+    total_size = stream.filesize
+    bytes_downloaded = total_size - bytes_remaining 
+    percentage_of_completion = bytes_downloaded / total_size * 100
+	# Then you have to use percentage_of_completion variable to draw the progress bar
+yt('https://www.youtube.com/watch?v=iOi5-XMBnzA').register_on_progress_callback(on_progress)
 -------------------------------------
 %load_ext fortranmagic							# ipython'da çalışmadı
 %%fortran
@@ -1087,6 +1104,15 @@ subroutine func_fort(n,d)
         d = d + (mod(i,3) - 1) * i
     end do
 end subroutine func_fort
+---
+In [33]: %who_ls
+Out[33]: ['i', 'idx', 'inp', 'np', 'os', 'out', 'subprocess']
+---
+%reset
+%reset -f
+%reset_selective -f variable
+---
+get_ipython().user_ns['variable']
 -------------------------------------
 np.min, min'den çok hızlıymış nasılsa
 -------------------------------------
@@ -1107,16 +1133,87 @@ lastname, *members = fa.split()				# çok iyi
 -------------------------------------
 cast = {input('role? '): input('actor? ') for i in range(2)}	# maşallah
 -------------------------------------
+options = {i:j for i,j in zip(keys,c)}
+options.get(filter,back_projection())
+-------------------------------------
+matplotlib.interactive()
+---
+ax2.set_axis_off()
+# şununla farkını bilmiyorum: 
+ax.get_yaxis().set_visible(False)
+---
+barprops = dict(aspect='auto', cmap='binary', interpolation='nearest')
+ax1.imshow(x.reshape((-1, 1)), **barprops)
+---
+ax.set_aspect(1)	# x ve y axis oranlarını 1 yap
+---
+from matplotlib.widgets import Cursor
+cursor = Cursor(ax, useblit=True, color='red', linewidth=2)
+---
+fig, ax = plt.subplots()
+im = ax.imshow(image)
+patch = patches.Circle((260, 200), radius=200, transform=ax.transData)
+im.set_clip_path(patch)
+---
+plt.axes #to create inset axes within the main plot axes.
+---
+ax2.margins(2, 2)           # Values >0.0 zoom out
+---
+fig = plt.figure(FigureClass=MyFigure, figtitle='my title')
+ax = fig.subplots()
+ax.plot([1, 2, 3])
+---
+fig, axs = plt.subplots(nrows=2, ncols=2, constrained_layout=True)
+for ax in axs.flat:
+    example_plot(ax)
+---
+# Remove horizontal space between axes
+fig.subplots_adjust(hspace=0)
+---
+t = np.arange(0.01, 5.0, 0.01)
+s = np.exp(-t)
+plt.plot(t, s)
+plt.xlim(5, 0)
+---
+# switch back to figure 1 and make some changes
+# <ipython-input-27-75b0dd9c5548>:1: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes c
+# urrently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, t
+# his warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+# plt.subplot(211)
+---
+ax = plt.gca()
+ax.set_xticklabels([])
+---
+secaxx = ax.secondary_xaxis('top', functions=(date2yday, yday2date))
+secaxx.set_xlabel('yday [2018]')
+---
+fig, ax1 = plt.subplots()
+color = 'tab:red'
+ax1.set_ylabel('exp', color=color)
+ax1.plot(t, data1, color=color)
+ax1.tick_params(axis='y', labelcolor=color)
+ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+fig.tight_layout()
+---
+plt.title('Center Title')
+plt.title('Left Title', loc='left')
+plt.title('Right Title', loc='right')	# aynı plotta
+---
+ax2.clear()	# bi keresinde plot yanıt vermiyor diyordu kapanmıyordu, bu kapattı hemen
+# KALDIĞIM YER: Align y-labels
+-------------------------------------
+make_frame = lambda t : 2*[ np.sin(404 * 2 * np.pi * t) ]
+-------------------------------------
 np.any 	# arraydaki herhangi (any) bi eleman true ise true döndürür
 		# boş veya hepsi false ise false döndürür. can be thought as OR operation
 np.all	# hepsi true ise veya boş ise true döndürür. can be thought as AND operation
-# both of them short circuit i.e. the execution as soon as the result is known 
+# both of them short circuit the execution as soon as the result is known 
 BURDAYIM kelimesini arat.
 TEKRAR BAK kelimesini arat.
 -------------------------------------
 
 
-
+length'lerin tamamı sıkıntı galiba
 
 
 
