@@ -883,6 +883,7 @@ In [17]: 8==8.0000000000000001
 Out[17]: True
 --------------------------------------
 vars(globals()['__builtins__'])
+dir()
 --------------------------------------
 python setup.py install --user
 #kalıcı olarak dev version'ı yüklemek için
@@ -1041,19 +1042,14 @@ In [49]: %%timeit
 In [50]: %%timeit
     ...: for word in old:
     ...:     newlist.append(word.upper())
-    ...:
 18 ms ± 1.03 ms per loop (mean ± std. dev. of 7 runs, 100 loops each)
 --- # Ama şu çok iyi ya. hem array hem list, map ile dehşet hızlanıyor; for'a ve comprehension'a göre:
 In [51]: %%timeit
     ...: newlist = map(str.upper, oldlist)
-    ...:
-    ...:
 2.23 µs ± 33.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 
 In [52]: %%timeit
     ...: newlist = map(str.upper, old)
-    ...:
-    ...:
 2.24 µs ± 32.5 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 -------------------------------------
 ben bu aralar numpy array'e baya sardım ama for döngüsü gerekmediği durumlarda list daha hızlı olabilir bakmak lazım
@@ -1074,6 +1070,15 @@ f = open('??? ???? ???? ???? ? ??? ????? ????? ????? ??? ??? ???? ???? ??????? ?
 f = f.read() # ilk unicode error verdi, tekrar deneyince oldu nasılsa
 -------------------------------------
 np.pad(arr.reshape(-1, 1), ((0, 0), (2, 0)), 'constant').reshape(-1, )
+---
+arr1d2=np.array([1,2])
+arr3d222=np.array([[[1,2],[3,4]],[[5,6],[7,8]]])
+# Correct Solution is below
+for i1 in range(len(arr1d2)):
+    print(arr1d2[i1]*arr3d222[i1])
+# faster and more pythonic way:
+arr1d2[:, np.newaxis, np.newaxis] * arr3d222	# or
+arr1d2.reshape(len(arr3d222),1,1) * arr3d222
 -------------------------------------
 def greet(greeting,target):
     return '%s! %s' % (greeting,target)
@@ -1211,10 +1216,7 @@ np.all	# hepsi true ise veya boş ise true döndürür. can be thought as AND op
 BURDAYIM kelimesini arat.
 TEKRAR BAK kelimesini arat.
 -------------------------------------
-
-
-length'lerin tamamı sıkıntı galiba
-
+kp00868070313
 
 
 
