@@ -828,6 +828,10 @@ def bode_ciz(k1=-0.49,k2=1):
 	plt.show(block=False)
 	return mag,phase,omega 
 # fonksiyonu çağırırken bode_ciz(); diye çağır yoksa bir sürü data print ediliyor
+---
+scipy.signal.lsim veya control.matlab.lsim ben ikincisini kullandım aşağıda
+yout, T, xout = lsim(T,e,d[0])
+# d[0] dediğim herhangi bir time vektörü, e input, T de transfer function
 ----------------------------------
 git clone ...git
 ---
@@ -1110,14 +1114,29 @@ subroutine func_fort(n,d)
     end do
 end subroutine func_fort
 ---
-In [33]: %who_ls
+In [33]: %who_ls 	# bu %who'nun \n'lı hali galiba
 Out[33]: ['i', 'idx', 'inp', 'np', 'os', 'out', 'subprocess']
 ---
 %reset
 %reset -f
 %reset_selective -f variable
 ---
+%save Desktop/498_workspace 1-37
+---
 get_ipython().user_ns['variable']
+---
+ctrl+e -> I-search backward
+ctrl+s -> I-search
+ctrl+p -> üst tuşundan farkını anlamadım
+ctrl+y -> bi tane girdi kopyalanmış, onu yapıştırıyosun gibi ama niye o anlamadım
+ctrl+o -> yazmadığın halde ek satır koyuyo
+ctrl+d -> escape (ama soruyo)
+ctrl+l -> cls (clear space)
+ctrl+v -> normal yapıştır 
+ctrl+j -> enter'dan farkını anlamadım
+ctrl+m -> enter'dan farkını anlamadım
+ctrl+ ->
+ctrl+ ->
 -------------------------------------
 np.min, min'den çok hızlıymış nasılsa
 -------------------------------------
@@ -1208,6 +1227,24 @@ ax2.clear()	# bi keresinde plot yanıt vermiyor diyordu kapanmıyordu, bu kapatt
 # KALDIĞIM YER: Align y-labels
 -------------------------------------
 make_frame = lambda t : 2*[ np.sin(404 * 2 * np.pi * t) ]
+-------------------------------------
+from moviepy import *	# how to concatenate
+import os
+os.chdir('Desktop/hastalar0')
+k = 1
+for i in os.listdir():
+    globals()['clip'+str(k)] = AudioFileClip(i)
+    k += 1
+liste = []
+for i in range(58):
+    liste.append(globals()['clip'+str(i+1)])
+final = concatenate_audioclips(liste)
+final.write_audiofile('final.mp3')		# ya orjinal dosyaların toplamı 17 MB, ama bu 62 MB :( niye öyle ?
+# bir üst satırdaki üzüntülü sualimin cevabını buldum elh. bitrate'i ayarlamam gerekiyomuş
+# sonradan cmd'yi açıp şunu yazdım: 
+ffmpeg -i final.mp3 -ab 37000 final.mp3 # (ab veya ba) (37000 de biraz farklı olabilir)
+# galiba 36000 falan yapınca bitrate 34kbps oldu, onda ses kalitesi biraz düşüktü. 
+# sonra 37000 yapınca 41kbps oldu. yani discrete değişiyo
 -------------------------------------
 np.any 	# arraydaki herhangi (any) bi eleman true ise true döndürür
 		# boş veya hepsi false ise false döndürür. can be thought as OR operation
