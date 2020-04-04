@@ -1125,7 +1125,7 @@ Out[33]: ['i', 'idx', 'inp', 'np', 'os', 'out', 'subprocess']
 ---
 get_ipython().user_ns['variable']
 ---
-ctrl+e -> I-search backward
+ctrl+r -> I-search backward
 ctrl+s -> I-search
 ctrl+p -> üst tuşundan farkını anlamadım
 ctrl+y -> bi tane girdi kopyalanmış, onu yapıştırıyosun gibi ama niye o anlamadım
@@ -1135,6 +1135,13 @@ ctrl+l -> cls (clear space)
 ctrl+v -> normal yapıştır 
 ctrl+j -> enter'dan farkını anlamadım
 ctrl+m -> enter'dan farkını anlamadım
+ctrl+w -> öbek öbek siliyo. mesela url = 'wdf.ttx' burda ilk tırnaklı ifadeyi, sonra ='i sonra da url kelimesini siliyo
+ctrl+t -> son iki harfin yerini değiştiriyo. çok mu önemli anlamadım. basmaya devam edersen bi harfi ileriye doğru götürmüş oluyo
+ctrl+h -> normal sil tuşundan bi farkı yok gibi
+ctrl+b -> sol tuşundan farkını anlamadım
+ctrl+c -> girdinin tamamını siliyo
+ctrl+n -> ctrl+c'den farkını anlamadım
+ctrl+ ->
 ctrl+ ->
 ctrl+ ->
 -------------------------------------
