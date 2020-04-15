@@ -5,5 +5,5 @@ for i in range(1):
 	time.sleep(5*3600)
 	os.startfile(wavPath)
 for i in range(10):
-	time.sleep(15)
+	time.sleep(3*60)
 	os.startfile(wavPath)
