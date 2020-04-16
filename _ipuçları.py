@@ -966,6 +966,12 @@ data.head()			# to look at the first few rows.
 data.corr()			# Calculate pairwise correlation between your variables. ama ne manaya geldiğini anlamadım
 scatter_matrix(data)# anlamadım ne işe yaradığını
 ---
+import csv
+with open('library.csv','r') as f:
+    r = csv.reader(f)
+    for row in r:
+        print(row)
+---
 myarray = numpy.array([[1, 2, 3], [4, 5, 6]])
 rownames = ['a', 'b']
 colnames = ['one', 'two', 'three']
@@ -1074,6 +1080,11 @@ f = open('??? ???? ???? ???? ? ??? ????? ????? ????? ??? ??? ???? ???? ??????? ?
 f = f.read() # ilk unicode error verdi, tekrar deneyince oldu nasılsa
 -------------------------------------
 np.pad(arr.reshape(-1, 1), ((0, 0), (2, 0)), 'constant').reshape(-1, )
+---
+np.any 	# arraydaki herhangi (any) bi eleman true ise true döndürür
+		# boş veya hepsi false ise false döndürür. can be thought as OR operation
+np.all	# hepsi true ise veya boş ise true döndürür. can be thought as AND operation
+# both of them short circuit the execution as soon as the result is known 
 ---
 arr1d2=np.array([1,2])
 arr3d222=np.array([[[1,2],[3,4]],[[5,6],[7,8]]])
@@ -1235,7 +1246,7 @@ ax2.clear()	# bi keresinde plot yanıt vermiyor diyordu kapanmıyordu, bu kapatt
 -------------------------------------
 make_frame = lambda t : 2*[ np.sin(404 * 2 * np.pi * t) ]
 -------------------------------------
-from moviepy import *	# how to concatenate
+from moviepy.editor import *	# how to concatenate
 import os
 os.chdir('Desktop/hastalar0')
 k = 1
@@ -1252,14 +1263,21 @@ final.write_audiofile('final.mp3')		# ya orjinal dosyaların toplamı 17 MB, ama
 ffmpeg -i final.mp3 -ab 37000 final.mp3 # (ab veya ba) (37000 de biraz farklı olabilir)
 # galiba 36000 falan yapınca bitrate 34kbps oldu, onda ses kalitesi biraz düşüktü. 
 # sonra 37000 yapınca 41kbps oldu. yani discrete değişiyo
--------------------------------------
-np.any 	# arraydaki herhangi (any) bi eleman true ise true döndürür
-		# boş veya hepsi false ise false döndürür. can be thought as OR operation
-np.all	# hepsi true ise veya boş ise true döndürür. can be thought as AND operation
-# both of them short circuit the execution as soon as the result is known 
+---
+from moviepy.editor import *	# simple video cut operation
+vid = VideoFileClip('PN_JUNCTIONS_PART_2.mp4')
+v1 = vid.subclip((13,24),(13,39))
+v1.write_videofile('212.mp4')
 BURDAYIM kelimesini arat.
 TEKRAR BAK kelimesini arat.
 -------------------------------------
+from pytube import Playlist
+playlist = Playlist('https://www.youtube.com/watch?v=58PpYacL-VQ&list=UUd6MoB9NC6uYN2grvUNT-Zg')
+playlist.populate_video_urls()
+print('Number of videos in playlist: %s' % len(playlist.video_urls))
+playlist.download_all()
+-------------------------------------
+
 kp00868070313
 
 
