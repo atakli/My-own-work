@@ -697,6 +697,7 @@ tek alt çizgi kullanmak tercih edilen bir yöntemdir.
 - bir kere yapılması yeterli olan işlemleri bir kereden fazla yapacak şekilde loop içine falan sokma! veya 
 ilgili fonksiyonun outputunu bir değişkene atamak yerine o fonksiyonu gereksiz yere tekrar çağırarak ...
 - python2 -m pip install ctype 
+- python2 -m SimpleHTTPServer
 0535 646 65 05
 - Bununla birlikte, birkaç koldan çalışan işlemler arasında tesanüd nasıl sağlanır, onu da bilmek gerekiyor.
 Threading bir yandan çay demlenirken, diğer yandan kahvaltı hazırlamak demektir, multiprocessing ise, siz kahvaltı hazırlarken,
@@ -1020,6 +1021,7 @@ plt.show()
 -------------------------------------
 k.shape = (5,2)		m.shape = (5,1)		k[:] = m	
 # deyince array([[ 7,  7], [ 4,  4], [13, 13], [ 0,  0], [ 1,  1]]) oluyor
+len()	ve .size da var
 -------------------------------------
 # ilginç bir broadcasting örneği:
 x = np.arange(4)
@@ -1276,6 +1278,36 @@ playlist = Playlist('https://www.youtube.com/watch?v=58PpYacL-VQ&list=UUd6MoB9NC
 playlist.populate_video_urls()
 print('Number of videos in playlist: %s' % len(playlist.video_urls))
 playlist.download_all()
+------------------------------------- MACHINE LEARNING
+# Labeling the Data
+import numpy as np	
+from sklearn import preprocessing
+input_labels = ['red','black','red','green','black','yellow','white']
+encoder = preprocessing.LabelEncoder()		# encoding
+encoder.fit(input_labels)
+test_labels = ['green','red','black']
+encoded_values = encoder.transform(test_labels)
+encoded_values = [3,0,4,1]					# decoding
+decoded_values = encoder.inverse_transform(encoded_values)
+---
+# Building a Classifier in Python
+# Naïve Bayes Classifier: The assumption is that the predictors are independent. In simple words:
+# it assumes that the presence of a particular feature in a class is unrelated to the presence of any other feature.
+# types of Naïve Bayes models are Gaussian, Multinomial and Bernoulli
+from sklearn.datasets import load_breast_cancer	
+label_names = data['target_names']^M
+labels = data['target']^M
+feature_names = data['feature_names']
+features = data['data']
+from sklearn.model_selection import train_test_split	# Organizing data into sets
+train, test, train_labels, test_labels = train_test_split(features,labels,test_size = 0.40, random_state = 42)
+from sklearn.naive_bayes import GaussianNB	# Building the model	# Naïve Bayes algorithm
+gnb = GaussianNB() # Gaussian Naïve Bayes Classifier
+model = gnb.fit(train, train_labels)	# train the model by fitting it to the data
+preds = gnb.predict(test)	# 0s and 1s are the predicted values for the tumor classes – malignant and benign.
+from sklearn.metrics import accuracy_score	# to determine the accuracy of our model
+print(accuracy_score(test_labels,preds))	
+
 -------------------------------------
 
 kp00868070313
