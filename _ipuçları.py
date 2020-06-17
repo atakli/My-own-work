@@ -166,7 +166,7 @@ major=sys.version_info[0]
 minor=sys.version_info[1]
 micro=sys.version_info[2]
 print(major+minor+micro)
-#u yöntem bütün python sürümlerinde çalışır
+# bu yöntem bütün python sürümlerinde çalışır
 if sys.version_info[1] < 3:
     print("Kullandığınız Python sürümü eski!")
 ---
@@ -398,6 +398,17 @@ alfabe = "abcçdefgğhıijklmnoöprsştuüvyz" harf_listesi=list(alfabe); print(
 li=list()		#boş liste oluşturur
 >>> list(range(2))	#aslında burada yaptığımız şey range ifadesini bir listeye çevirmekten ibarettir
 [0, 1]				#bu arada range ifadesinin type'i "range"miş
+---
+def ex(val,list=[]):
+    list.append(val)
+    return list
+list1 = ex(10)
+list2 = ex(123,[])
+list3 = ex('a')
+# çok ilginç: ex fonksiyonu her çağrıldığında list değişkeni belirtilmemişse tekrar tekrar kullanılır. Bu durumun önüne geçmek için
+# fonksiyonun içinde list=None dendikten sonra şunlar yazılmalı:
+if list is None:
+	list = []
 ---
 >>> meyveler
 ['elma', 'armut', 'çilek', 'kiraz']
@@ -822,13 +833,13 @@ dizit ve diziy yanlış sonuçlar veriyodu, uzun incelemeler sonucu en sonunda d
 meğer expanded'mış sinc fonksiyonu
 ----------------------------------
 import numpy as np, matplotlib.pyplot as plt, control as ct
+# fonksiyonu çağırırken bode_ciz(); diye çağır yoksa bir sürü data print ediliyor
 def bode_ciz(k1=-0.49,k2=1):
 	# (if hop = 1)
 	sys=ct.tf([k2],[1,-k1])
 	mag,phase,omega = ct.bode(sys,dB=False) #eşitlemeye gerek yok aslında
 	plt.show(block=False)
 	return mag,phase,omega 
-# fonksiyonu çağırırken bode_ciz(); diye çağır yoksa bir sürü data print ediliyor
 ---
 scipy.signal.lsim veya control.matlab.lsim ben ikincisini kullandım aşağıda
 yout, T, xout = lsim(T,e,d[0])
@@ -887,8 +898,10 @@ print('aymi mi: ',np.array_equal(final_result.sort(),result1.sort()))
 In [17]: 8==8.0000000000000001
 Out[17]: True
 --------------------------------------
-vars(globals()['__builtins__'])
-dir()
+dir(__builtins__) # builtin fonksiyon ve exception'lar
+vars(globals()['__builtins__']) # yukardakinin baya ayrıntılı hali sanki
+dir() # o sırada namespace'te tanımlı değişken, fonksiyon vs isimleri
+
 --------------------------------------
 python setup.py install --user
 #kalıcı olarak dev version'ı yüklemek için
@@ -1271,7 +1284,7 @@ vid = VideoFileClip('PN_JUNCTIONS_PART_2.mp4')
 v1 = vid.subclip((13,24),(13,39))
 v1.write_videofile('212.mp4')
 BURDAYIM kelimesini arat.
-TEKRAR BAK kelimesini arat.
+TEKRAR BAK kelimesini arat. ... meselesi
 -------------------------------------
 from pytube import Playlist
 playlist = Playlist('https://www.youtube.com/watch?v=58PpYacL-VQ&list=UUd6MoB9NC6uYN2grvUNT-Zg')
@@ -1307,6 +1320,74 @@ model = gnb.fit(train, train_labels)	# train the model by fitting it to the data
 preds = gnb.predict(test)	# 0s and 1s are the predicted values for the tumor classes – malignant and benign.
 from sklearn.metrics import accuracy_score	# to determine the accuracy of our model
 print(accuracy_score(test_labels,preds))	
+# Support Vector Machines (SVM)
+import pandas as pd
+import numpy as np
+from sklearn import svm, datasets
+import matplotlib.pyplot as plt
+iris = datasets.load_iris()
+X = iris.data[:, :2]
+y = iris.target
+x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
+y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
+h = (x_max / x_min)/100
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+np.arange(y_min, y_max, h))
+X_plot = np.c_[xx.ravel(), yy.ravel()]
+C = 1.0
+svc_classifier = svm.SVC(kernel='linear', C=C, decision_function_shape='ovr').fit(X, y)
+Z = svc_classifier.predict(X_plot)
+Z = Z.reshape(xx.shape)
+plt.figure(figsize=(15, 5))
+plt.contourf(xx, yy, Z, cmap=plt.cm.tab10, alpha=0.3)
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap=plt.cm.Set1)
+plt.xlabel('Sepal length')
+plt.ylabel('Sepal width')
+plt.xlim(xx.min(), xx.max())
+plt.title('SVC with linear kernel')
+plt.show()
+# Logistic Regression
+import numpy as np
+from sklearn import linear_model
+import matplotlib.pyplot as plt
+X = np.array([[2, 4.8], [2.9, 4.7], [2.5, 5], [3.2, 5.5], [6, 5], [7.6, 4], \
+[3.2, 0.9], [2.9, 1.9], [2.4, 3.5], [0.5, 3.4], [1, 4], [0.9, 5.9]])
+y = np.array([0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3])
+Classifier_LR = linear_model.LogisticRegression(solver='liblinear', C=75) # create logistic regression classifier
+Classifier_LR.fit(X, y) # train this classifier
+def Logistic_visualize(Classifier_LR, X, y):	# in order to visulize the output
+	min_x, max_x = X[:, 0].min() - 1.0, X[:, 0].max() + 1.0
+	min_y, max_y = X[:, 1].min() - 1.0, X[:, 1].max() + 1.0
+	return min_x, max_x, min_y, max_y
+min_x, max_x, min_y, max_y = Logistic_visualize(Classifier_LR, X, y)
+mesh_step_size = 0.02	# define the mesh grid of X and Y values:
+x_vals, y_vals = np.meshgrid(np.arange(min_x, max_x, mesh_step_size), np.arange(min_y, max_y, mesh_step_size))
+# run the classifier on the mesh grid:
+output = Classifier_LR.predict(np.c_[x_vals.ravel(), y_vals.ravel()])
+output = output.reshape(x_vals.shape)
+plt.figure()
+plt.pcolormesh(x_vals, y_vals, output, cmap=plt.cm.gray)
+plt.scatter(X[:, 0], X[:, 1], c=y, s=75, edgecolors='black', linewidth=1, cmap=plt.cm.Paired) # specify the boundaries of the plot:
+plt.xlim(x_vals.min(), x_vals.max())
+plt.ylim(y_vals.min(), y_vals.max())
+plt.xticks((np.arange(int(X[:, 0].min() - 1), int(X[:, 0].max() + 1), 1.0)))
+plt.yticks((np.arange(int(X[:, 1].min() - 1), int(X[:, 1].max() + 1), 1.0)))
+plt.show()
+# Decision Tree Classifier
+------------------------------------- Symbolic Python 
+import sympy 
+x, y, z = sympy.symbols('x y z')
+a = 2 * sympy.atan(x * sympy.sin(y) / (1 - x * sympy.cos(y))).diff(y) + 1 # tek variable varsa diff() yeterli
+sympy.simplify(a)
+sympy.pretty_print(_)
+
+
+
+
+
+
+
+
 
 -------------------------------------
 

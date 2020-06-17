@@ -11,5 +11,5 @@ def download_web_image(url):
     name = random.randrange(1,10)
     full_name = str(name) + ".jpg"
     ur.urlretrieve(url, full_name)
-metin = "https://www.google.com.tr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
-download_web_image(metin)
+link = "https://www.google.com.tr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+download_web_image(link)
