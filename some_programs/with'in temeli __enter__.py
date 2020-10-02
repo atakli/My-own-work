@@ -14,5 +14,5 @@ class my_file_reader():
 
 # artık bu yapıyı kullanabilirsin:
 # with my_file_reader('dog_breeds.txt') as reader:
-    Perform custom class operations
+    # Perform custom class operations
     # pass

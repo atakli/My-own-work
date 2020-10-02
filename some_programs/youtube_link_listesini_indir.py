@@ -9,4 +9,3 @@ for i in l:
 		k.write('\n'+i)		# indiremediğini ayrı bi dosyaya yaz sonra elle indiririm
 		pass			# yoksa continue mu olacak bilemedim. ama bence farketmez
 k.close()
-#İhsan Şenocak - Risale-i Nur Külliyatı - Sözler - On Dokuzuncu Söz
