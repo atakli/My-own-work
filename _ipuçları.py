@@ -120,14 +120,16 @@ else:
 #Bu üçlü yapıyı hiç kullanmadan bir ömrü rahatlıkla geçirebilirsiniz.
 ---
 import os
-os.startfile("C:\\users\emre\desktop\pardus-hastane.png")		#veya (r"C:\users...)
+os.startfile("C:\\users\emre\desktop\pardus-hastane.png")		# veya (r"C:\users...)
 Please note that on unix or mac, there should be a different code
 So, you should be aware of that the code you wrote may not be working on other OS
 ---
-chromePath	=r'C:\Users\emre\AppData\Local\Google\Chrome\Application\chrome.exe'
-png			=r'C:\users\emre\desktop\pardus-hastane.png'
+chromePath	= r'C:\Program Files\Google\Chrome\Application\chrome.exe'
+png			= r'C:\users\emre\desktop\vaay.png'
 subprocess.Popen("%s %s" % (chromePath,png))
 #bu çok hoşuma gitti: evet tasdik ediyorum. (png'yi chromePath ile açıyo) Emre
+# edit: (29.6.20) neden %s ile yazıldığını düşünürken bunun aslında cmd'ye yazılan kodla atynı olduğunu farkettim:
+sb.Popen(chromePath + ' ' +png)
 ---
 #yazdığınız programda mutlaka ama mutlaka işletilmesi gereken bir kısım varsa, o kısmı finally... bloğu içine 
 #yazabilirsiniz. Mesela eğer dosya üzerinde işlem yapılırken bir hata ile karşılaşılırsa 
@@ -156,7 +158,7 @@ sorted("çiçek",key=locale.strxfrm)	#yine de i'yi ı'dan önce yazdı. ama iyi.
 >>> çevrim={i:harfler.index(i) for i in harfler}
 >>> sorted("gelinız",key=çevrim.get)				# elh ala külli hal sivelküfri veddalal
 ['e', 'g', 'ı', 'i', 'l', 'n', 'z']
-#her harfi bir sayıya atayarak yaptı				yukarda listelerin sort() metodu ile yapılanı var
+# her harfi bir sayıya atayarak yaptı				yukarda listelerin sort() metodu ile yapılanı var
 ---
 print("http://",i) ifadesinin print("http://"+i) ile aynı sonucu vermesi için sonuna ,sep="" koymak lazım
 karakter dizileri değiştirilemeyen (immutable) bir veri tipidir.
@@ -854,6 +856,7 @@ git push
 Everything up-to-date
 --- 
 git pull origin master
+# sadece git pull dedim oldu
 ---
 git add yeni.py				
 git rm file1.txt			
@@ -894,6 +897,9 @@ result_2 =  [list(i) for i in itertools.product(teta_degree,t,x_values)] #fayda 
 --------------------------------------
 # .sort() dediğin şeyin output'u none olduğu için bu satır her zaman True verir:
 print('aymi mi: ',np.array_equal(final_result.sort(),result1.sort()))
+# See Also:
+# allclose: Returns True if two arrays are element-wise equal within a tolerance.
+# array_equiv: Returns True if input arrays are shape consistent and all elements equal.
 --------------------------------------
 In [17]: 8==8.0000000000000001
 Out[17]: True
@@ -950,7 +956,7 @@ In [73]: print("%.2e" % .000009878)
 -------------------------------------
 yav şu işe bak ipython --pylab diye bişey varmış yeni öğreniyorum. plot deyince show'a gerek kalmıyo ve 
 xlim gibi şeyleri hemen tesir ettiriyo plot üzerinde, kapatıp açmadan. matlab gibi
- tutor diyo ki: 
+tutor diyo ki: 
 "In all examples, this book will assume that you are using a Unix-based computer:
 either Linux or Macintosh. If you are using a Windows machine and are for some reason :)
 unable or unwilling to upgrade that machine to Linux, you can still use Python on a
@@ -1030,7 +1036,7 @@ plt.show()
 #    bits_list.append(tuple((1 if b else 0) for b in bits))
 #    to_byte = dict((bits, i) for i, bits in enumerate(bits_list))
 -------------------------------------
-#unutma: copy.deepcopy meselesi
+# unutma: copy.deepcopy meselesi
 -------------------------------------
 k.shape = (5,2)		m.shape = (5,1)		k[:] = m	
 # deyince array([[ 7,  7], [ 4,  4], [13, 13], [ 0,  0], [ 1,  1]]) oluyor
@@ -1056,7 +1062,7 @@ In [48]: %%timeit
     ...:
     ...:
 10.1 ms ± 52.4 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
-#####	list cmprehension list ile array'a göre daha hızlı. ilginç
+#####	list comprehension list ile array'a göre daha hızlı. ilginç
 --- # ikinci bir örnek:
 In [49]: %%timeit
     ...: for word in oldlist:
@@ -1077,18 +1083,30 @@ In [52]: %%timeit
     ...: newlist = map(str.upper, old)
 2.24 µs ± 32.5 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 -------------------------------------
-ben bu aralar numpy array'e baya sardım ama for döngüsü gerekmediği durumlarda list daha hızlı olabilir bakmak lazım
+# ben bu aralar numpy array'e baya sardım ama for döngüsü gerekmediği durumlarda list daha hızlı olabilir bakmak lazım
 ---
->>> def myfunc(a, b):
-...     ​"Return a-b if a>b, otherwise return a+b"
-...     ​if a > b:
-...         ​return a - b
-...     ​else:
-...         ​return a
->>>
->>> vfunc = np.vectorize(myfunc)
->>> vfunc([1, 2, 3, 4], 2)
+def myfunc(a, b):
+    if a > b:
+        return a - b
+    else:
+        return a + b
+
+vfunc = np.vectorize(myfunc)	# bu heralde sadece yazılan kodu azaltmak için.çünkü normal yoldan yapıunca süresi değişmedi.aşağıda:
+vfunc([1, 2, 3, 4], 2)
 array([3, 4, 1, 2])
+264 µs ± 1.69 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+---
+kl = []
+def rt(a, b):^M
+    global kl
+    for im in a:
+        if im > b:^M
+            kl.append(a - b)
+        else:^M
+            kl.append(a + b)
+%%timeit
+vfunc([1, 2, 3, 4], 2)
+272 µs ± 20.6 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 -------------------------------------
 f = open('??? ???? ???? ???? ? ??? ????? ????? ????? ??? ??? ???? ???? ??????? ??????? ????? ?????? ?????.mp3')
 # farsça karakterler var o yüzden öyle görünüyo
@@ -1170,6 +1188,22 @@ ctrl+n -> ctrl+c'den farkını anlamadım
 ctrl+ ->
 ctrl+ ->
 ctrl+ ->
+---
+%history -l 2 # son iki line'ı yazdırır
+%history 2 # line number'ı 2 olan satırı yazdırır
+-o # also print outputs for each input.
+# By default, input history is printed without line numbers so it can be directly pasted into an editor. Use -n to show them.
+%save mak.py 1-56 -a # -a append eder diyo ama olmadı, overwrite etti, dikkat et
+---
+# jupyter notebook'ta imleç metodun parantezleri içinde iken shift + tab'a basarsan öntanımlı argümanları görebilirsin
+# aslında metodun help'ini görüyosun heralde
+---
+%history -g -f "fee.py" # bütün ipython history'sini dosyaya yazar. g olmazsa sadece current session'ı yazar. veya tam tersi
+---
+jupyter nbconvert --to script --no-prompt "bir_notebook.ipynb"
+# script yerine pdf,html filan yazılabiliyo. python ile script aynı gibi
+# --no-prompt [In1]'lerin yazılmamasını sağlıyo
+# --clear-output -> Clear output of current file and save in place, overwriting the existing notebook. gibi başkaları da var
 -------------------------------------
 np.min, min'den çok hızlıymış nasılsa
 -------------------------------------
@@ -1195,6 +1229,19 @@ options.get(filter,back_projection())
 -------------------------------------
 matplotlib.interactive()
 ---
+fig,ax = plt.subplots()
+ax.plot([1,2,3],[10,-10,30])
+# save the figure object as a binary file:
+import pickle
+pickle.dump(fig, open('FigureObject.fig.pickle', 'wb')) # This is for Python 3 - py2 may need `file` instead of `open`
+# you may want to consider to use 'with'
+figx = pickle.load(open('FigureObject.fig.pickle', 'rb'))
+figx.show() # Show the figure, edit it, etc.!
+# You can even extract the data from the plots:
+data = figx.axes[0].lines[0].get_data() 
+data = figx.axes[0].lines[0].get_xydata() # or for an image:
+data = figx.axes[0].images[0].get_data()
+---
 ax2.set_axis_off()
 # şununla farkını bilmiyorum: 
 ax.get_yaxis().set_visible(False)
@@ -1216,7 +1263,7 @@ plt.axes #to create inset axes within the main plot axes.
 ---
 ax2.margins(2, 2)           # Values >0.0 zoom out
 ---
-fig = plt.figure(FigureClass=MyFigure, figtitle='my title')
+fig = plt.figure(FigureClass=MyFigure, figtitle='my title') # MyFigure denen şey function olcak heralde
 ax = fig.subplots()
 ax.plot([1, 2, 3])
 ---
@@ -1257,6 +1304,8 @@ plt.title('Left Title', loc='left')
 plt.title('Right Title', loc='right')	# aynı plotta
 ---
 ax2.clear()	# bi keresinde plot yanıt vermiyor diyordu kapanmıyordu, bu kapattı hemen
+# .clear() içindeki line'ı isliyo, .remove plotun tamamını kaldırıyo, bi pencereyi kapatmadığı kalıyo
+# haşiye - ilginç: bi keresinde yanıt vermiyodu, remove() dedim, yanıt vermeye başladı 
 # KALDIĞIM YER: Align y-labels
 -------------------------------------
 make_frame = lambda t : 2*[ np.sin(404 * 2 * np.pi * t) ]
@@ -1281,16 +1330,52 @@ ffmpeg -i final.mp3 -ab 37000 final.mp3 # (ab veya ba) (37000 de biraz farklı o
 ---
 from moviepy.editor import *	# simple video cut operation
 vid = VideoFileClip('PN_JUNCTIONS_PART_2.mp4')
-v1 = vid.subclip((13,24),(13,39))
+v1 = vid.subclip((13,24),(13,39)) # ikinci parantezi yazmazsan otomatikman duration of the video olur
 v1.write_videofile('212.mp4')
+v1.write_videofile('gulpembe.mp4')
 BURDAYIM kelimesini arat.
 TEKRAR BAK kelimesini arat. ... meselesi
+-------------------------------------
+# TEXT-TO-SPEECH. 
+# python 3.6.6'da çalıştı. 3.8.1'de çalışmadı
+import pyttsx3
+engine = pyttsx3.init()
+engine.say('I will speak this text')
+engine.runAndWait()
+---
+engine.save_to_file('nasılsın emre', 'test.mp3')
+engine.runAndWait()
+---
+rate = engine.getProperty('rate')
+engine.setProperty('rate',125)
+---
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)	# zaten bi tane var. index 1 yok.
+-------------------------------------
+android studio'da adb'yi usb'siz wifi üserinden kullamak için:
+C:\Users\Emre\AppData\Local\Android\Sdk\platform-tools>adb tcpip 5555
+restarting in TCP mode port: 5555
+
+C:\Users\Emre\AppData\Local\Android\Sdk\platform-tools>adb connect 10.119.132.239
+connected to 10.119.132.239:5555
+
 -------------------------------------
 from pytube import Playlist
 playlist = Playlist('https://www.youtube.com/watch?v=58PpYacL-VQ&list=UUd6MoB9NC6uYN2grvUNT-Zg')
 playlist.populate_video_urls()
 print('Number of videos in playlist: %s' % len(playlist.video_urls))
 playlist.download_all()
+---
+# playlist öğesi çalışmamıştı, html json cart curt yüzünden source kodu şöyle olmalıymış: (pytube version: '9.6.4', python 3.8.1)
+from pytube import Playlist
+import re
+
+playlist = Playlist("https://www.youtube.com/playlist?list=PLynhp4cZEpTbRs_PYISQ8v_uwO0_mDg_X")
+playlist._video_regex = re.compile(r"\"url\":\"(/watch\?v=[\w-]*)")
+
+print(len(playlist.video_urls))
+for url in playlist.video_urls:
+    print(url)
 ------------------------------------- MACHINE LEARNING
 # Labeling the Data
 import numpy as np	
@@ -1380,8 +1465,94 @@ x, y, z = sympy.symbols('x y z')
 a = 2 * sympy.atan(x * sympy.sin(y) / (1 - x * sympy.cos(y))).diff(y) + 1 # tek variable varsa diff() yeterli
 sympy.simplify(a)
 sympy.pretty_print(_)
+---
+IB, b = sympy.symbols('IB b')
+sympy.solve(-VBB + IB * RBB + 0.7 + IB * (b+1) * 10e3,b) # diğerleri constant. ,b demezsen sözlük olarak verir. yoksa list
+---
+expr = 2*x - 7*y # is equivalent to writing:
+expr = Eq(2*x - 7*y, 0) which would tell SymPy that 2*x - 7*y = 0
+---
+sympy.rewrite() # çok keşfetmedim
+---
+-------------------------------------
+from sklearn import datasets
+iris = datasets.load_iris()
+digits = datasets.load_digits()
+digits.data
+digits.target # gives the ground truth for the digit dataset, that is . # also known as label
+# the number corresponding to each digit image that we are trying to learn
+# The data is always a 2D array, shape (n_samples, n_features), although the original data may have had a different shape. 
+# In the case of the digits, each original sample is an image of shape (8, 8) and can be accessed using: 
+digits.images[0]
+# An example of an estimator is the class sklearn.svm.SVC 
+from sklearn import svm
+clf = svm.SVC(gamma=0.001, C=100.) # In this example, we set the value of gamma manually. To find 
+# good values for these parameters, we can use tools such as grid search and cross validation.
+clf.fit(digits.data[:-1],digits.target[:-1]) # except for the last image, which we’ll reserve for our predicting
+# pickle'ı kullanabilirsin: 
+s = pickle.dumps(clf) ... # dump deyince "missing required argument 'file'" dedi
+# pickle has some security and maintainability issues:
+# https://scikit-learn.org/stable/modules/model_persistence.html#model-persistence
+clf.predict(digits.data[-1:]) # refer to one of the upper comments: "The data is always a 2D array"
+# bir digit'i görebilmek için:
+plt.imshow(digits.images[-1])
+from joblib import dump,load
+dump(clf,'filename.joblib') #  more efficient on big data
+---
+plt.imshow(digits.images[-1],cmap=plt.cm.gray_r)
+digits.images.shape
+(1797, 8, 8)
+# To use this dataset with scikit-learn, we transform each 8x8 image into a feature vector of length 64:
+data = digits.images.reshape(digits.images.shape[0],-1)	# it becomes (1797, 64)
+# An estimator is any object that learns from data; 
+# it may be a classification, regression or clustering algorithm 
+# or a transformer that extracts/filters useful features from raw data.
+# All estimator objects expose a fit method that takes a dataset (usually a 2-d array):
+estimator.fit(data)
 
-
+# to classify the observations in a set of finite labels, in other words to “name” the objects observed: classification
+# to predict a continuous target variable: regression
+import numpy as np
+from sklearn import datasets
+iris_X, iris_y = datasets.load_iris(return_X_y=True)
+np.unique(iris_y)	# iris_y içindeki eleman çeşitleri galiba
+---
+np.random.seed(0) # A random permutation, to split the data randomly (galiba)
+indices = np.random.permutation(len(iris_X))
+iris_X_train = iris_X[indices[:-10]]
+iris_y_train = iris_y[indices[:-10]]
+iris_X_test = iris_X[indices[-10:]]
+iris_y_test = iris_y[indices[-10:]]
+from sklearn.neighbors import KNeighborsClassifier # # Create and fit a nearest-neighbor classifier
+knn = KNeighborsClassifier()
+knn.fit(iris_X_train, iris_y_train)
+knn.predict(iris_X_test)
+iris_y_test
+---
+diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
+diabetes_X_train = diabetes_X[:-20]
+diabetes_X_test  = diabetes_X[-20:]
+diabetes_y_train = diabetes_y[:-20]
+diabetes_y_test  = diabetes_y[-20:]
+from sklearn import linear_model
+regr = linear_model.LinearRegression()
+regr.fit(diabetes_X_train, diabetes_y_train)
+regr.coef_
+np.mean((regr.predict(diabetes_X_test) - diabetes_y_test)**2) # mean square error
+# Explained variance score: 1 is perfect prediction and 0 means that there is no linear relationship between X and y:
+regr.score(diabetes_X_test, diabetes_y_test)
+# yetkili olmak. çaresiz beceriksiz kaldıkları o durumları düşün geliştiriliyor
+# her an şüphe et gözün açık olsun ve muhtemel her aksaklığı göz önğnde bulundur. hastanede doktor kılıklı biri fake olabilir
+--- 
+SYSTEM CONFIGURATION CHANGES
+windows + x -> performans -> ayarlar -> gelişmiş -> değiştir -> en baştaki tiki kaldırdım -> özel boyut (önceden "sistem yönetimli
+boyut"taydı) -> sırasıyla 3072 ve 9216 MB -> ayarla -> tamam
+bu ayarın sadece temporarily olarak yapılması önerilmiş:
+Increasing page file size may help prevent instabilities and crashing in Windows. However, a hard drive read/write times are much 
+slower than what they would be if the data were in your computer memory. Having a larger page file is going to add extra work for 
+your hard drive, causing everything else to run slower. Page file size should only be increased when encountering out-of-memory 
+errors, and only as a temporary fix. A better solution is to adding more memory to the computer.
+---
 
 
 
@@ -1391,7 +1562,7 @@ sympy.pretty_print(_)
 
 -------------------------------------
 
-kp00868070313
+kp00868070313 #edit: bu acaba kyk kredi numarası mı 
 
 
 
