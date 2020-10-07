@@ -1335,6 +1335,9 @@ v1.write_videofile('212.mp4')
 v1.write_videofile('gulpembe.mp4')
 BURDAYIM kelimesini arat.
 TEKRAR BAK kelimesini arat. ... meselesi
+---
+ffmpeg -ss 00:01:00 -i "İlmin İzzeti ve Namusu İçin Münazara - Muhammed.mp4" -to 00:01:05 -c copy output.mp4
+# moviepy acayip yavaş. bu hem hızlı hem daha pratik. ama baş tarafında ufak bi sorun oldu
 -------------------------------------
 # TEXT-TO-SPEECH. 
 # python 3.6.6'da çalıştı. 3.8.1'de çalışmadı
@@ -1360,6 +1363,7 @@ C:\Users\Emre\AppData\Local\Android\Sdk\platform-tools>adb connect 10.119.132.23
 connected to 10.119.132.239:5555
 
 -------------------------------------
+--download-quizzes
 from pytube import Playlist
 playlist = Playlist('https://www.youtube.com/watch?v=58PpYacL-VQ&list=UUd6MoB9NC6uYN2grvUNT-Zg')
 playlist.populate_video_urls()
@@ -1547,6 +1551,7 @@ regr.score(diabetes_X_test, diabetes_y_test)
 SYSTEM CONFIGURATION CHANGES
 windows + x -> performans -> ayarlar -> gelişmiş -> değiştir -> en baştaki tiki kaldırdım -> özel boyut (önceden "sistem yönetimli
 boyut"taydı) -> sırasıyla 3072 ve 9216 MB -> ayarla -> tamam
+(windows + x işe yaramadı. başlat'a performans yazdım. sonra şunu seçtim: windowsun görünmünü ve performansını ayarla)
 bu ayarın sadece temporarily olarak yapılması önerilmiş:
 Increasing page file size may help prevent instabilities and crashing in Windows. However, a hard drive read/write times are much 
 slower than what they would be if the data were in your computer memory. Having a larger page file is going to add extra work for 
